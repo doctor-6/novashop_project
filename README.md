@@ -65,12 +65,28 @@ storefront. Built with **HTML, CSS, vanilla JavaScript** and a small
 -   [Node.js](https://nodejs.org/) **18 or newer** (tested on Node 24).
 -   npm (bundled with Node).
 
+## Getting the code
+
+```powershell
+git clone https://github.com/doctor-6/novashop_project.git
+cd novashop_project
+```
+
+> 📝 The GitHub repository is named `novashop_project`; the folder you
+> clone it into is up to you (this copy of the project lives in a
+> folder called `novatech-store`). The only external request the pages
+> make is Google Fonts — offline, the site still works with system
+> fallback fonts.
+
 ## Installation
 
 ```powershell
-# from the project folder
-npm install
+# from the project folder (reproducible install from package-lock.json)
+npm ci
 ```
+
+`npm install` works too and is the right choice if you ever intend to
+add or change dependencies.
 
 Optionally copy the example environment file (all values have safe
 defaults, so this step is not required):
@@ -96,6 +112,21 @@ Then open:
 **Demo admin password: `1234`** — change it via the `ADMIN_PASSWORD`
 environment variable in `.env` if you like. Again: this is a demo, not
 real security.
+
+### Verify a fresh clone (complete checklist)
+
+```powershell
+git clone https://github.com/doctor-6/novashop_project.git
+cd novashop_project
+npm ci        # install exactly what package-lock.json pins
+npm test      # 48 API tests on an isolated server — no setup needed
+npm start     # then open the two URLs from the table above
+```
+
+If `npm test` reports `48 passed, 0 failed` and the storefront loads,
+the clone is working. No database setup or environment file is required:
+the JSON "database" and the `uploads/` folder are created automatically
+on first run.
 
 ---
 

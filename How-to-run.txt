@@ -1,2 +1,25 @@
-open cmd in folder
-type npm start
+NOVATECH STORE - HOW TO RUN (quick start)
+=========================================
+
+1. Install the dependencies (only needed once, or after package.json changes).
+   Open a terminal/command prompt in this folder and type:
+
+       npm install
+
+   (npm ci does the same thing but installs exactly what package-lock.json pins.)
+
+2. Start the app:
+
+       npm start
+
+3. Open these addresses in your browser:
+
+       Storefront:  http://localhost:3000/
+       Admin panel: http://localhost:3000/admin/
+       Admin password: 1234  (demo password for the classroom demo only)
+
+Optional: copy .env.example to .env to change the port, password or upload
+limit. Everything has safe defaults, so you can skip this.
+
+Tip: run "npm test" any time to check the app works - it uses its own
+temporary data and never touches your demo products.

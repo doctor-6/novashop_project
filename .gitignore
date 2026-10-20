@@ -1,8 +1,10 @@
 # Dependencies
 node_modules/
 
-# Environment files
+# Environment files (real config stays local; the example stays tracked)
 .env
+.env.*
+!.env.example
 
 # Local data store (demo products)
 server/data/products.json

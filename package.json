@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Digital products storefront with admin panel (university demo project)",
   "main": "server.js",
+  "private": true,
   "scripts": {
     "start": "node server.js",
     "test": "node scripts/run-api-tests.js",
