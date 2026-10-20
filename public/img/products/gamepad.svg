@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Wireless gamepad illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141b2e"/>
+      <stop offset="1" stop-color="#0b0f1a"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b8cff"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.55">
+      <stop offset="0" stop-color="#5b8cff" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#5b8cff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="600" rx="36" fill="url(#bg)"/>
+  <circle cx="300" cy="300" r="230" fill="url(#halo)"/>
+  <g transform="translate(300 310)">
+    <path d="M-190 -40 C -210 40 -190 130 -130 130 C -95 130 -80 100 -50 100 L 50 100 C 80 100 95 130 130 130 C 190 130 210 40 190 -40 C 175 -100 120 -120 70 -110 L -70 -110 C -120 -120 -175 -100 -190 -40 Z" fill="#1b2338" stroke="#313d5c" stroke-width="3"/>
+    <g fill="#232d47">
+      <rect x="-140" y="-60" width="60" height="20" rx="10"/>
+      <rect x="-160" y="-80" width="20" height="60" rx="10"/>
+    </g>
+    <circle cx="-112" cy="-70" r="13" fill="url(#glow)"/>
+    <g fill="#2c3a5e">
+      <circle cx="110" cy="-84" r="15"/>
+      <circle cx="148" cy="-52" r="15"/>
+      <circle cx="72" cy="-52" r="15"/>
+      <circle cx="110" cy="-20" r="15"/>
+    </g>
+    <circle cx="110" cy="-84" r="15" fill="url(#glow)" opacity="0.85"/>
+    <rect x="-38" y="10" width="76" height="24" rx="12" fill="#232d47"/>
+    <circle cx="-24" cy="66" r="20" fill="#232d47"/>
+    <circle cx="24" cy="66" r="20" fill="#232d47"/>
+    <circle cx="-24" cy="66" r="20" fill="url(#glow)" opacity="0.35"/>
+  </g>
+</svg>

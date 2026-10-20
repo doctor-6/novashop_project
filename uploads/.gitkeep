@@ -1,0 +1,4 @@
+# uploads/
+
+This folder holds product photos uploaded from the admin panel.
+Files are stored locally and git-ignored. Do not put executable files here.

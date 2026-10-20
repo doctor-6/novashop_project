@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Gaming headset illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141b2e"/>
+      <stop offset="1" stop-color="#0b0f1a"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b8cff"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.55">
+      <stop offset="0" stop-color="#5b8cff" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#5b8cff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="600" rx="36" fill="url(#bg)"/>
+  <circle cx="300" cy="300" r="230" fill="url(#halo)"/>
+  <g transform="translate(300 310)">
+    <path d="M-170 60 L -170 -10 A 170 170 0 0 1 170 -10 L 170 60" fill="none" stroke="#232d47" stroke-width="34" stroke-linecap="round"/>
+    <path d="M-170 60 L -170 -10 A 170 170 0 0 1 170 -10 L 170 60" fill="none" stroke="url(#glow)" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+    <rect x="-212" y="30" width="84" height="150" rx="34" fill="#1b2338" stroke="#313d5c" stroke-width="3"/>
+    <rect x="128" y="30" width="84" height="150" rx="34" fill="#1b2338" stroke="#313d5c" stroke-width="3"/>
+    <rect x="-196" y="58" width="52" height="94" rx="26" fill="url(#glow)" opacity="0.6"/>
+    <rect x="144" y="58" width="52" height="94" rx="26" fill="url(#glow)" opacity="0.6"/>
+    <path d="M-170 180 C -170 250 -140 268 -100 268" fill="none" stroke="#232d47" stroke-width="14" stroke-linecap="round"/>
+    <circle cx="-96" cy="268" r="16" fill="url(#glow)"/>
+  </g>
+</svg>

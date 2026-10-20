@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Admin Panel | NovaTech Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/admin/css/admin.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>%F0%9F%94%92</text></svg>">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ======================= Login view ======================= -->
+  <section class="auth-screen" id="login-view" aria-labelledby="login-heading">
+    <div class="auth-card">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true">◆</span>
+        <span class="brand-name">Nova<span class="brand-accent">Tech</span></span>
+      </a>
+
+      <h1 id="login-heading">Admin login</h1>
+      <p class="auth-subtitle">
+        Sign in to manage products, prices and photos.
+      </p>
+
+      <form id="login-form" novalidate>
+        <div class="form-field">
+          <label for="login-password">Password</label>
+          <div class="password-field">
+            <input
+              type="password"
+              id="login-password"
+              name="password"
+              autocomplete="current-password"
+              placeholder="Enter the demo password"
+              required
+            >
+            <button class="password-toggle" type="button" id="login-password-toggle" aria-label="Show password" aria-pressed="false">Show</button>
+          </div>
+          <p class="field-error" id="login-error" role="alert"></p>
+        </div>
+
+        <button class="btn btn-primary btn-block" type="submit" id="login-button">
+          Sign in
+        </button>
+      </form>
+
+      <p class="demo-note">
+        <strong>Demo password:</strong> <code>1234</code><br>
+        This is a classroom demo, not real security. Never use a hardcoded
+        password like this in production.
+      </p>
+
+      <a class="back-link" href="/">← Back to storefront</a>
+    </div>
+  </section>
+
+  <!-- ======================= Dashboard view ======================= -->
+  <div class="dashboard is-hidden" id="dashboard-view">
+    <header class="dashboard-header">
+      <div class="container dashboard-header-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">◆</span>
+          <span class="brand-name">Nova<span class="brand-accent">Tech</span></span>
+          <span class="admin-tag">Admin</span>
+        </a>
+
+        <div class="header-actions">
+          <button class="icon-button" type="button" id="theme-toggle" aria-label="Switch to light theme">
+            <span aria-hidden="true" id="theme-toggle-icon">☀️</span>
+          </button>
+          <a class="btn btn-outline btn-sm" href="/" target="_blank" rel="noopener">View storefront</a>
+          <button class="btn btn-ghost btn-sm" type="button" id="logout-button">Log out</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container dashboard-main" id="main-content">
+      <div class="dashboard-intro">
+        <div>
+          <h1>Product management</h1>
+          <p class="muted" id="product-summary">Loading products…</p>
+        </div>
+        <button class="btn btn-primary" type="button" id="add-product-button">
+          + Add product
+        </button>
+      </div>
+
+      <!-- Loading state -->
+      <div class="state-panel" id="admin-loading-state" role="status">
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Loading products…</p>
+      </div>
+
+      <!-- Error state -->
+      <div class="state-panel is-hidden" id="admin-error-state" role="alert">
+        <span class="state-icon" aria-hidden="true">⚠</span>
+        <h3>Could not load products</h3>
+        <p id="admin-error-message">Please check the server and try again.</p>
+        <button class="btn btn-primary" type="button" id="admin-retry-button">Retry</button>
+      </div>
+
+      <!-- Empty state -->
+      <div class="state-panel is-hidden" id="admin-empty-state">
+        <span class="state-icon" aria-hidden="true">🗂️</span>
+        <h3>No products yet</h3>
+        <p>Add your first product to see it appear on the storefront.</p>
+        <button class="btn btn-primary" type="button" id="empty-add-button">Add product</button>
+      </div>
+
+      <!-- Product table -->
+      <div class="table-wrap is-hidden" id="admin-table-wrap">
+        <table class="product-table">
+          <caption class="visually-hidden">List of products in the store</caption>
+          <thead>
+            <tr>
+              <th scope="col">Photo</th>
+              <th scope="col">Name</th>
+              <th scope="col">Category</th>
+              <th scope="col">Price</th>
+              <th scope="col">Updated</th>
+              <th scope="col"><span class="visually-hidden">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody id="product-table-body">
+            <!-- Rows rendered by js/admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- ======================= Product modal ======================= -->
+  <div class="modal-backdrop is-hidden" id="product-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <header class="modal-header">
+        <h2 id="modal-title">Add product</h2>
+        <button class="icon-button" type="button" id="modal-close-button" aria-label="Close dialog">✕</button>
+      </header>
+
+      <form id="product-form" novalidate>
+        <!-- The id of the product being edited; empty when creating -->
+        <input type="hidden" id="product-id" name="id">
+
+        <div class="form-grid">
+          <div class="form-field form-field-full">
+            <label for="product-name">Product name <span class="required">*</span></label>
+            <input type="text" id="product-name" name="name" maxlength="120" placeholder="e.g. Aurora RGB Keyboard" required>
+            <p class="field-error" id="name-error"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="product-price">Price (€) <span class="required">*</span></label>
+            <input type="number" id="product-price" name="price" min="0" step="0.01" inputmode="decimal" placeholder="99.99" required>
+            <p class="field-error" id="price-error"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="product-category">Category</label>
+            <input type="text" id="product-category" name="category" list="category-list" maxlength="60" placeholder="e.g. Keyboards">
+            <datalist id="category-list"></datalist>
+            <p class="field-error" id="category-error"></p>
+          </div>
+
+          <div class="form-field form-field-full">
+            <label for="product-description">Description <span class="required">*</span></label>
+            <textarea id="product-description" name="description" rows="4" maxlength="2000" placeholder="Short description shown on the product card…" required></textarea>
+            <p class="field-error" id="description-error"></p>
+          </div>
+
+          <div class="form-field form-field-full">
+            <label for="product-image">Product photo</label>
+            <p class="field-hint" id="image-hint">JPEG, PNG or WebP, up to 5 MB. Leave empty to keep the current photo.</p>
+            <div class="drop-zone" id="drop-zone">
+              <input class="drop-zone-input" type="file" id="product-image" name="image" accept="image/jpeg,image/png,image/webp">
+              <label class="drop-zone-label" for="product-image">
+                <span class="drop-zone-icon" aria-hidden="true">🖼️</span>
+                <span><strong>Click to browse</strong> or drag &amp; drop a photo here</span>
+              </label>
+            </div>
+            <p class="field-error" id="image-error"></p>
+
+            <div class="image-preview is-hidden" id="image-preview">
+              <img id="image-preview-img" alt="Selected image preview">
+              <p class="field-hint is-hidden" id="image-preview-error">Preview could not be loaded.</p>
+              <button class="btn btn-outline btn-sm" type="button" id="remove-image-button">Remove photo</button>
+            </div>
+
+            <p class="field-hint is-hidden" id="image-remove-notice">
+              Photo marked for removal. It will be deleted when you save.
+              <button type="button" class="btn btn-outline btn-sm" id="undo-remove-image-button">Undo</button>
+            </p>
+          </div>
+        </div>
+
+        <p class="form-error-summary is-hidden" id="form-error-summary" role="alert"></p>
+
+        <footer class="modal-footer">
+          <button class="btn btn-ghost" type="button" id="cancel-button">Cancel</button>
+          <button class="btn btn-primary" type="submit" id="save-button">Save product</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================= Delete confirmation dialog ======================= -->
+  <div class="modal-backdrop is-hidden" id="delete-modal" role="alertdialog" aria-modal="true" aria-labelledby="delete-title" aria-describedby="delete-description">
+    <div class="modal-card modal-card-small">
+      <header class="modal-header">
+        <h2 id="delete-title">Delete product?</h2>
+      </header>
+      <p id="delete-description" class="muted">
+        Are you sure you want to delete <strong id="delete-product-name"></strong>?
+        This cannot be undone.
+      </p>
+      <footer class="modal-footer">
+        <button class="btn btn-ghost" type="button" id="delete-cancel-button">Cancel</button>
+        <button class="btn btn-danger" type="button" id="delete-confirm-button">Delete</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Toast notifications -->
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="/admin/js/admin.js" defer></script>
+</body>
+</html>

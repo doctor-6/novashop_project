@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nova Tech Store - premium PC peripherals, gaming gear and digital software keys.">
+  <meta name="theme-color" content="#0b0f1a">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nova Tech Store | PC Peripherals & Gaming Gear">
+  <meta property="og:description" content="Keyboards, mice, audio and software keys for players and makers. Curated picks, honest specs and instant digital delivery.">
+  <meta property="og:image" content="/img/products/keyboard.svg">
+  <title>Nova Tech Store | PC Peripherals &amp; Gaming Gear</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>%E2%9C%A8</text></svg>">
+</head>
+<body>
+  <a class="skip-link" href="#products">Skip to products</a>
+
+  <!-- ======================= Navigation ======================= -->
+  <header class="site-header" id="top">
+    <nav class="navbar container" aria-label="Main navigation">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">◆</span>
+        <span class="brand-name">Nova<span class="brand-accent">Tech</span></span>
+      </a>
+
+      <div class="nav-right">
+        <div class="nav-end">
+          <button class="icon-button nav-icon" type="button" id="theme-toggle" aria-label="Switch to light theme">
+            <span aria-hidden="true" id="theme-toggle-icon">☀️</span>
+          </button>
+          <button class="icon-button nav-icon cart-button" type="button" id="cart-button" aria-label="Open demo cart" aria-controls="cart-drawer" aria-expanded="false">
+            <span aria-hidden="true">🛒</span>
+            <span class="cart-count is-hidden" id="cart-count" aria-hidden="true">0</span>
+          </button>
+        </div>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
+
+        <div class="nav-menu" id="nav-menu">
+          <ul class="nav-links">
+            <li><a href="#products">Products</a></li>
+            <li><a href="#about">Why NovaTech</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <a class="btn btn-outline nav-cta" href="/admin/">Admin&nbsp;Panel</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ======================= Hero ======================= -->
+    <section class="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="hero-eyebrow">Digital storefront demo</p>
+          <h1 class="hero-title">Gear that keeps up with&nbsp;you.</h1>
+          <p class="hero-subtitle">
+            Keyboards, mice, audio and software keys for players and makers.
+            Curated picks, honest specs and instant digital delivery.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#products">Browse products</a>
+            <a class="btn btn-ghost" href="#about">Why shop with us</a>
+          </div>
+          <dl class="hero-stats" aria-label="Shop highlights">
+            <div class="stat">
+              <dt>Products in stock</dt>
+              <dd id="stat-products">—</dd>
+            </div>
+            <div class="stat">
+              <dt>Digital delivery</dt>
+              <dd>Instant</dd>
+            </div>
+            <div class="stat">
+              <dt>Demo checkout</dt>
+              <dd>100% free</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Decorative product collage; hidden on small screens -->
+        <div class="hero-art" aria-hidden="true">
+          <figure class="art-card art-card-main">
+            <img src="/img/products/keyboard.svg" alt="">
+          </figure>
+          <figure class="art-card art-card-float art-card-a">
+            <img src="/img/products/mouse.svg" alt="">
+          </figure>
+          <figure class="art-card art-card-float art-card-b">
+            <img src="/img/products/headset.svg" alt="">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= Products ======================= -->
+    <section class="section products-section" id="products" aria-labelledby="products-heading">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title" id="products-heading">Featured products</h2>
+          <p class="section-subtitle">Everything below is loaded live from the shop's product API.</p>
+        </header>
+
+        <div class="product-toolbar">
+          <div class="field search-field">
+            <label class="visually-hidden" for="search-input">Search products</label>
+            <span class="field-icon" aria-hidden="true">⌕</span>
+            <input
+              type="search"
+              id="search-input"
+              placeholder="Search products… (press /)"
+              autocomplete="off"
+            >
+            <button class="search-clear is-hidden" type="button" id="search-clear" aria-label="Clear search">✕</button>
+          </div>
+          <div class="field select-field">
+            <label class="visually-hidden" for="category-select">Filter by category</label>
+            <select id="category-select">
+              <option value="">All categories</option>
+            </select>
+          </div>
+          <div class="field select-field">
+            <label class="visually-hidden" for="sort-select">Sort products</label>
+            <select id="sort-select">
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+              <option value="name">Name: A–Z</option>
+              <option value="newest">Newest first</option>
+            </select>
+          </div>
+          <p class="result-count" id="result-count" aria-live="polite"></p>
+        </div>
+
+        <!-- Skeleton cards fill the grid while products load -->
+        <div class="product-grid" id="product-grid" role="list" aria-busy="true">
+          <!-- Product cards are rendered here by js/storefront.js -->
+        </div>
+
+        <!-- Error state -->
+        <div class="state-panel is-hidden" id="error-state" role="alert">
+          <span class="state-icon" aria-hidden="true">⚠</span>
+          <h3>Something went wrong</h3>
+          <p id="error-message">We could not load the products. Please try again.</p>
+          <button class="btn btn-primary" type="button" id="retry-button">Retry</button>
+        </div>
+
+        <!-- Empty state -->
+        <div class="state-panel is-hidden" id="empty-state">
+          <span class="state-icon" aria-hidden="true">🔍</span>
+          <h3>No products found</h3>
+          <p id="empty-message">Try a different search term or clear the filters.</p>
+          <button class="btn btn-outline" type="button" id="clear-filters-button">Clear filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= About / benefits ======================= -->
+    <section class="section about-section" id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title" id="about-heading">Why shop at NovaTech</h2>
+          <p class="section-subtitle">A tiny demo store with a serious attention to detail.</p>
+        </header>
+
+        <div class="benefit-grid">
+          <article class="benefit-card">
+            <span class="benefit-icon" aria-hidden="true">⚡</span>
+            <h3>Instant digital delivery</h3>
+            <p>Licence keys and download links arrive in seconds, not days. No shipping, no waiting.</p>
+          </article>
+          <article class="benefit-card">
+            <span class="benefit-icon" aria-hidden="true">🛡️</span>
+            <h3>Curated quality</h3>
+            <p>Every product is hand-picked. If it would not survive a lan-party, it does not make the list.</p>
+          </article>
+          <article class="benefit-card">
+            <span class="benefit-icon" aria-hidden="true">💬</span>
+            <h3>Real human support</h3>
+            <p>Questions about compatibility? Our support crew answers fast, in plain language.</p>
+          </article>
+          <article class="benefit-card">
+            <span class="benefit-icon" aria-hidden="true">🔄</span>
+            <h3>30-day friendly returns</h3>
+            <p>Changed your mind? Digital items and hardware come with a no-drama 30-day window.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= FAQ ======================= -->
+    <section class="section faq-section" id="faq" aria-labelledby="faq-heading">
+      <div class="container container-narrow">
+        <header class="section-header">
+          <h2 class="section-title" id="faq-heading">Frequently asked questions</h2>
+          <p class="section-subtitle">Quick answers about this university demo project.</p>
+        </header>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Is this a real shop?</summary>
+            <p>No. NovaTech is a fictional storefront built as a university project. There is no real checkout, payment or order fulfilment — everything you see runs locally on your machine.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Where do the products come from?</summary>
+            <p>All products are stored in a small JSON database on the server and served through a REST API. The admin panel edits exactly the same data, so changes appear here after a refresh.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Can I add or edit products myself?</summary>
+            <p>Yes — open the <a href="/admin/">admin panel</a>, log in with the demo password shown there, and manage products, prices and photos. The storefront updates on the next page load.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Are my details safe here?</summary>
+            <p>This demo never asks for payment details and stores no customer accounts. Uploaded photos and product data stay in local folders on the machine running the server.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= CTA band ======================= -->
+    <section class="cta-band" id="contact" aria-labelledby="cta-heading">
+      <div class="container cta-inner">
+        <div>
+          <h2 class="section-title" id="cta-heading">Manage this shop</h2>
+          <p class="section-subtitle">Log in to the admin panel to add, edit or delete products and photos.</p>
+        </div>
+        <a class="btn btn-primary" href="/admin/">Open admin panel</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================= Footer ======================= -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top">
+          <span class="brand-mark" aria-hidden="true">◆</span>
+          <span class="brand-name">Nova<span class="brand-accent">Tech</span></span>
+        </a>
+        <p>A fictional digital-gear storefront built for a university web development course. No real products are sold.</p>
+      </div>
+      <nav class="footer-col" aria-label="Footer shop links">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#about">Why NovaTech</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Footer project links">
+        <h3>Project</h3>
+        <ul>
+          <li><a href="/admin/">Admin panel</a></li>
+          <li><a href="/api/products">Products API</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> NovaTech Store — classroom demo. Not a real retailer.</p>
+      <p class="footer-note">Built with HTML, CSS &amp; vanilla JavaScript.</p>
+    </div>
+  </footer>
+
+  <!-- ======================= Product quick view ======================= -->
+  <dialog class="quickview" id="product-dialog" aria-labelledby="quickview-title">
+    <div class="quickview-card">
+      <button class="icon-button quickview-close" type="button" id="quickview-close" aria-label="Close product details">✕</button>
+      <div class="quickview-media" id="quickview-media">
+        <!-- Image or placeholder rendered by js/storefront.js -->
+      </div>
+      <div class="quickview-body">
+        <span class="quickview-category is-hidden" id="quickview-category"></span>
+        <h3 id="quickview-title"></h3>
+        <p class="quickview-desc" id="quickview-desc"></p>
+        <div class="quickview-footer">
+          <span class="quickview-price" id="quickview-price"></span>
+          <button class="btn btn-primary" type="button" id="quickview-add">Add to demo cart</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ======================= Demo cart drawer ======================= -->
+  <div class="cart-backdrop is-hidden" id="cart-backdrop"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-labelledby="cart-title" aria-hidden="true">
+    <header class="cart-header">
+      <h2 id="cart-title">Demo cart</h2>
+      <button class="icon-button" type="button" id="cart-close" aria-label="Close demo cart">✕</button>
+    </header>
+    <p class="cart-demo-note">
+      Demo only — this cart is a visual extra. There is no checkout, payment or order fulfilment.
+    </p>
+    <ul class="cart-items" id="cart-items"></ul>
+    <p class="cart-empty" id="cart-empty">Your demo cart is empty. Add products with “Add to demo cart”.</p>
+    <footer class="cart-footer">
+      <div class="cart-total-row">
+        <span>Total</span>
+        <strong id="cart-total">€0.00</strong>
+      </div>
+      <button class="btn btn-outline btn-block" type="button" id="cart-clear">Clear cart</button>
+    </footer>
+  </aside>
+
+  <script src="/js/storefront.js" defer></script>
+</body>
+</html>

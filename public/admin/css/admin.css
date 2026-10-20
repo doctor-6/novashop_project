@@ -1,0 +1,905 @@
+/* public/admin/css/admin.css
+   Admin panel styles. Shares the same design tokens as the storefront so the
+   two pages feel like one product, but with tighter, denser layout. */
+
+/* ======================== Design tokens ======================== */
+:root {
+  --bg: #0b0f1a;
+  --bg-soft: #101728;
+  --surface: #141b2e;
+  --surface-raised: #1a2338;
+  --border: #26314d;
+  --border-strong: #33406299;
+
+  --text: #eef2ff;
+  --text-soft: #a8b3cf;
+  --text-faint: #6f7b99;
+
+  --accent: #5b8cff;
+  --accent-2: #8b5cf6;
+  --accent-grad: linear-gradient(135deg, var(--accent), var(--accent-2));
+  --accent-soft: rgba(91, 140, 255, 0.14);
+
+  --success: #34d399;
+  --success-soft: rgba(52, 211, 153, 0.14);
+  --danger: #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.14);
+
+  /* Surface effects (overridden by the light theme) */
+  --header-bg: rgba(11, 15, 26, 0.85);
+  --hover-bg: rgba(255, 255, 255, 0.06);
+  --code-bg: rgba(11, 15, 26, 0.7);
+  --row-hover-bg: rgba(91, 140, 255, 0.05);
+
+  --font-display: 'Sora', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 0 1px rgba(91, 140, 255, 0.25), 0 12px 40px rgba(91, 140, 255, 0.18);
+
+  --container-width: 1180px;
+  --transition: 180ms ease;
+}
+
+/* ======================== Light theme ========================
+   Applied when the html element carries data-theme="light"
+   (same localStorage key as the storefront, toggled in js/admin.js). */
+[data-theme='light'] {
+  --bg: #f5f7fc;
+  --bg-soft: #eaeef8;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --border: #d9dfef;
+  --border-strong: #b6c1dd;
+
+  --text: #17203a;
+  --text-soft: #4a5573;
+  --text-faint: #77829e;
+
+  --accent: #3563e9;
+  --accent-2: #7c3aed;
+  --accent-soft: rgba(53, 99, 233, 0.1);
+
+  --header-bg: rgba(245, 247, 252, 0.85);
+  --hover-bg: rgba(23, 32, 58, 0.06);
+  --code-bg: rgba(23, 32, 58, 0.07);
+  --row-hover-bg: rgba(53, 99, 233, 0.05);
+
+  --shadow-md: 0 12px 32px rgba(23, 32, 58, 0.12);
+  --shadow-glow: 0 0 0 1px rgba(53, 99, 233, 0.25), 0 12px 40px rgba(53, 99, 233, 0.14);
+}
+
+[data-theme='light'] body {
+  background:
+    radial-gradient(1000px 480px at 90% -10%, rgba(124, 58, 237, 0.08), transparent 60%),
+    var(--bg);
+}
+
+[data-theme='light'] .modal-backdrop {
+  background: rgba(23, 32, 58, 0.4);
+}
+
+/* ======================== Base ======================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--text);
+  background:
+    radial-gradient(1000px 480px at 90% -10%, rgba(139, 92, 246, 0.14), transparent 60%),
+    var(--bg);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  margin: 0 0 var(--space-2, 0.5rem);
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-2);
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.container {
+  width: min(100% - 2.5rem, var(--container-width));
+  margin-inline: auto;
+}
+
+.muted {
+  color: var(--text-soft);
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 300;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  left: 0;
+  color: #fff;
+}
+
+/* ======================== Brand ======================== */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+.brand:hover {
+  color: var(--text);
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--accent-grad);
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.brand-accent {
+  background: var(--accent-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.admin-tag {
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(91, 140, 255, 0.35);
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ======================== Buttons ======================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font: 600 0.92rem/1 var(--font-body);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition),
+    background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--accent-grad);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(91, 140, 255, 0.3);
+}
+
+.btn-primary:hover {
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-soft);
+}
+
+.btn-ghost:hover {
+  color: var(--text);
+  background: var(--hover-bg);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.83rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.icon-button {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.icon-button:hover {
+  background: var(--hover-bg);
+  color: var(--text);
+}
+
+/* ======================== Login screen ======================== */
+.auth-screen {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: var(--space-4, 1.5rem);
+}
+
+.auth-card {
+  width: min(100%, 420px);
+  padding: 2.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.auth-card .brand {
+  margin-bottom: 1.5rem;
+}
+
+.auth-card h1 {
+  font-size: 1.6rem;
+}
+
+.auth-subtitle {
+  color: var(--text-soft);
+  margin-bottom: 1.5rem;
+}
+
+.demo-note {
+  margin-top: 1.5rem;
+  padding: 0.9rem 1rem;
+  background: var(--accent-soft);
+  border: 1px dashed rgba(91, 140, 255, 0.4);
+  border-radius: var(--radius-sm);
+  color: var(--text-soft);
+  font-size: 0.85rem;
+}
+
+.demo-note code {
+  background: var(--code-bg);
+  padding: 0.1rem 0.45rem;
+  border-radius: 6px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 1.25rem;
+  color: var(--text-faint);
+  font-size: 0.88rem;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+/* ======================== Forms ======================== */
+.form-field {
+  margin-bottom: 1.1rem;
+}
+
+.form-field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-bottom: 0.4rem;
+}
+
+.required {
+  color: var(--danger);
+}
+
+.field-hint {
+  color: var(--text-faint);
+  font-size: 0.8rem;
+  margin: -0.15rem 0 0.5rem;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font: inherit;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--text-faint);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(91, 140, 255, 0.25);
+}
+
+/* Invalid field styling (set once the server/client reports an error) */
+.form-field.is-invalid input,
+.form-field.is-invalid textarea {
+  border-color: var(--danger);
+}
+
+/* The file input is visually hidden inside the drop zone, so the zone
+   itself must carry the invalid styling. */
+.form-field.is-invalid .drop-zone {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.field-error {
+  min-height: 1.1rem;
+  margin: 0.3rem 0 0;
+  color: var(--danger);
+  font-size: 0.8rem;
+}
+
+.form-error-summary {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--danger-soft);
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  color: var(--danger);
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1rem;
+}
+
+.form-field-full {
+  grid-column: 1 / -1;
+}
+
+/* Image preview inside the form */
+.image-preview {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.9rem;
+  padding: 0.9rem;
+  background: var(--bg-soft);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.image-preview img {
+  width: 96px;
+  height: 72px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+/* Password field with show/hide toggle (login screen) */
+.password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-field input {
+  padding-right: 4.2rem;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-faint);
+  font: 600 0.78rem/1 var(--font-body);
+  cursor: pointer;
+  transition: color var(--transition), background var(--transition);
+}
+
+.password-toggle:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* Drag & drop upload zone around the file input */
+.drop-zone {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 1.4rem 1rem;
+  background: var(--bg-soft);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.drop-zone:hover,
+.drop-zone.is-dragover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* Keyboard users: show the focus ring on the zone itself */
+.drop-zone:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(91, 140, 255, 0.25);
+}
+
+/* The native input stays in the DOM (and in the form) but is visually
+   hidden; the label below triggers the file picker for mouse and keyboard. */
+.drop-zone-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.drop-zone-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-soft);
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.drop-zone-label strong {
+  color: var(--text);
+}
+
+.drop-zone-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* ======================== Dashboard layout ======================== */
+.dashboard-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.dashboard-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 68px;
+  flex-wrap: wrap;
+  padding-block: 0.5rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.dashboard-main {
+  padding-block: 2.5rem 4rem;
+}
+
+.dashboard-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+}
+
+.dashboard-intro h1 {
+  font-size: 1.7rem;
+  margin-bottom: 0.25rem;
+}
+
+.dashboard-intro p {
+  margin: 0;
+}
+
+/* ======================== States ======================== */
+.state-panel {
+  display: grid;
+  place-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-soft);
+}
+
+.state-panel h3 {
+  color: var(--text);
+  margin: 0;
+}
+
+.state-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.spinner {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ======================== Product table ======================== */
+.table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  box-shadow: var(--shadow-md);
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.product-table th,
+.product-table td {
+  padding: 0.9rem 1.1rem;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--border);
+}
+
+.product-table thead th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+  background: var(--bg-soft);
+}
+
+.product-table tbody tr {
+  transition: background var(--transition);
+}
+
+.product-table tbody tr:hover {
+  background: var(--row-hover-bg);
+}
+
+.product-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-thumb {
+  width: 64px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: contain;
+  object-position: center;
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+}
+
+.cell-name {
+  font-weight: 600;
+}
+
+.cell-category {
+  color: var(--text-soft);
+  font-size: 0.88rem;
+}
+
+.no-category {
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+.cell-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.cell-date {
+  color: var(--text-faint);
+  font-size: 0.83rem;
+  white-space: nowrap;
+}
+
+.row-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.row-actions .btn-danger {
+  background: transparent;
+  border-color: rgba(248, 113, 113, 0.4);
+  color: var(--danger);
+}
+
+.row-actions .btn-danger:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+/* ======================== Modal ======================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background: rgba(5, 8, 16, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+.modal-card {
+  width: min(100%, 640px);
+  max-height: min(90vh, 860px);
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 1.75rem;
+}
+
+.modal-card-small {
+  width: min(100%, 420px);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* ======================== Toasts ======================== */
+.toast-region {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: min(360px, calc(100vw - 2.5rem));
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  font-size: 0.9rem;
+  animation: toast-in 220ms ease;
+}
+
+.toast-success {
+  border-color: rgba(52, 211, 153, 0.45);
+  background: linear-gradient(180deg, rgba(52, 211, 153, 0.12), var(--surface-raised));
+}
+
+.toast-error {
+  border-color: rgba(248, 113, 113, 0.45);
+  background: linear-gradient(180deg, rgba(248, 113, 113, 0.12), var(--surface-raised));
+}
+
+.toast-icon {
+  font-size: 1.05rem;
+}
+
+.toast-close {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: var(--text-faint);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.15rem 0.35rem;
+  border-radius: 6px;
+}
+
+.toast-close:hover {
+  color: var(--text);
+  background: var(--hover-bg);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ======================== Responsive ======================== */
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-intro {
+    align-items: stretch;
+  }
+
+  .dashboard-intro .btn {
+    width: 100%;
+  }
+
+  .auth-card {
+    padding: 1.5rem;
+  }
+
+  .toast-region {
+    left: 1.25rem;
+    right: 1.25rem;
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
